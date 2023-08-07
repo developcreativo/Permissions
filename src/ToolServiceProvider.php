@@ -28,6 +28,11 @@ class ToolServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/2023_08_07_090647_group_permission.php.stub.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
 
+
+        $this->publishes([
+            __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => $this->app->databasePath() . "/seeders/RolesAndPermissionsSeeder.php",
+        ], 'seeders');
+
         Nova::serving(function (ServingNova $event) {
             //
         });
