@@ -16,7 +16,7 @@ use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Spatie\Permission\PermissionRegistrar;
-
+use Laravel\Nova\Fields\Hidden;
 class Role extends Resource
 {
 
@@ -109,6 +109,7 @@ class Role extends Resource
 
             DateTime::make(__('Fecha de creación'), 'created_at')->exceptOnForms(),
             DateTime::make(__('Fecha de actualización'), 'updated_at')->exceptOnForms(),
+            Hidden::make('updated_at')->default(now()),
 
             Checkboxes::make(__('Permissions'), 'permissions')
                 ->withGroups()

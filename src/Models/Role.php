@@ -12,4 +12,18 @@ use Spatie\Permission\Models\Permission;
 class Role extends \Spatie\Permission\Models\Role
 {
     use SupportsRole;
+
+    public $timestamps = true;
+    protected static function boot()
+    {
+        parent::boot();
+        static::updating( function ($model) {
+            $model->updated_at = now();
+        });
+
+
+        static::saved( function ($model) {
+            $model->updated_at = now();
+        });
+    }
 }
