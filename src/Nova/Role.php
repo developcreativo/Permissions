@@ -7,6 +7,7 @@
 namespace Developcreativo\Permissions\Nova;
 
 use Developcreativo\Permissions\Checkboxes;
+use Developcreativo\Permissions\Nova\Actions\DuplicateAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
@@ -177,7 +178,11 @@ class Role extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new DuplicateAction())->canSee(function () {
+                return true;
+            })->withoutActionEvents(),
+        ];
     }
 
 
