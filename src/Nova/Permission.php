@@ -75,7 +75,7 @@ class Permission extends Resource
                     return $this->fieldAvailable('id');
                 }),
 
-            Text::make(__('Name'), 'name')
+            Text::make(__('Name'), __('name'))
                 ->rules(['required', 'string', 'max:255'])
                 ->creationRules('unique:' . config('permission.table_names.permissions'))
                 ->updateRules('unique:' . config('permission.table_names.permissions') . ',name,{{resourceId}}'),
@@ -131,5 +131,4 @@ class Permission extends Resource
     {
         return __('Roles & Permisos');
     }
-
 }
