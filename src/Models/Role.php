@@ -7,11 +7,13 @@
 namespace Developcreativo\Permissions\Models;
 
 use Developcreativo\Permissions\Traits\SupportsRole;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Models\Permission;
 
 class Role extends \Spatie\Permission\Models\Role
 {
     use SupportsRole;
+    use LogsActivity;
 
     public $timestamps = true;
     protected static function boot()
