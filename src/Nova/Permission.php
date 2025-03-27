@@ -8,7 +8,7 @@
 
 namespace Developcreativo\Permissions\Nova;
 
-
+use Developcreativo\Permissions\Nova\Actions\ExportPermissionCsvAction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -130,5 +130,18 @@ class Permission extends Resource
     public static function group()
     {
         return __('Roles & Permisos');
+    }
+
+    public function actions(Request $request)
+    {
+        return [
+            (new ExportPermissionCsvAction)
+                ->standalone()
+                ->confirmButtonText(__('Export'))
+                ->cancelButtonText(__('Cancel'))
+                ->canSee(function ($request) {
+                    return $request->user()->can('Exportar permisos a csv');
+                }),
+        ];
     }
 }
