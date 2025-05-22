@@ -179,9 +179,9 @@ class Role extends Resource
     public function actions(Request $request)
     {
         return [
-            (new DuplicateAction())->canSee(function () {
-                return true;
-            })->withoutActionEvents(),
+            // (new DuplicateAction())->canSee(function () {
+            //     return true;
+            // })->withoutActionEvents(),
         ];
     }
 

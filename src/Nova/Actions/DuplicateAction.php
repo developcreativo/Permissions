@@ -28,7 +28,7 @@ class DuplicateAction extends Action
 
             $permissions = $role->permissions;
 
-            $scope = Scope::query()->where('rol_id', $role->id)->first();
+            // $scope = Scope::query()->where('rol_id', $role->id)->first();
 
             $role_created = Role::query()->create([
                 'name' => $fields->name
@@ -36,28 +36,28 @@ class DuplicateAction extends Action
 
             $role_created->syncPermissions($permissions->pluck('name')->toArray());
 
-            if (!empty($scope)) {
-                $new_scope = Scope::create([
-                    'rol_id' => $role_created->id,
-                    'tipo_scope' => $scope->tipo_scope,
-                    'nombre' => isset($fields->nombre) ? $fields->nombre :  $scope->nombre,
-                ]);
-                $access_scope = AccessScope::query()->where('scope_id', $scope->id)->get();
-                $access_list = [];
-                if (!empty($access_scope)) {
-                    foreach ($access_scope as $access) {
-                        $access_list[] = [
-                            'nombre' => $access->nombre,
-                            'scope_id' => $new_scope->id,
-                            'cliente_id' => $access->cliente_id,
-                            'pais_id' => $access->pais_id,
-                            'ubicacion_id' => $access->ubicacion_id,
-                        ];
-                    }
+            // if (!empty($scope)) {
+            //     $new_scope = Scope::create([
+            //         'rol_id' => $role_created->id,
+            //         'tipo_scope' => $scope->tipo_scope,
+            //         'nombre' => isset($fields->nombre) ? $fields->nombre :  $scope->nombre,
+            //     ]);
+            //     $access_scope = AccessScope::query()->where('scope_id', $scope->id)->get();
+            //     $access_list = [];
+            //     if (!empty($access_scope)) {
+            //         foreach ($access_scope as $access) {
+            //             $access_list[] = [
+            //                 'nombre' => $access->nombre,
+            //                 'scope_id' => $new_scope->id,
+            //                 'cliente_id' => $access->cliente_id,
+            //                 'pais_id' => $access->pais_id,
+            //                 'ubicacion_id' => $access->ubicacion_id,
+            //             ];
+            //         }
 
-                    AccessScope::create($access_list);
-                }
-            }
+            //         AccessScope::create($access_list);
+            //     }
+            // }
         }
 
         return Action::message(__('Status has been successfully updated!'));
