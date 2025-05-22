@@ -70,7 +70,7 @@ class DuplicateAction extends Action
                 ->creationRules('unique:' . config('permission.table_names.roles'))
                 ->updateRules('unique:' . config('permission.table_names.roles') . ',name,{{resourceId}}'),
 
-            Text::make(__('Scope Name'), 'nombre')->creationRules('unique:' . 'scopes')
+            // Text::make(__('Scope Name'), 'nombre')->creationRules('unique:' . 'scopes')
         ];
     }
 }
